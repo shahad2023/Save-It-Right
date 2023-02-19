@@ -47,7 +47,7 @@ struct WarrantyItemComponenet: View {
                         HStack(spacing:10){
                             if $value.durationYears.wrappedValue > 0{
                                 Text(
-                                    String( $value.durationYears.wrappedValue) + " Years"
+                                    String( $value.durationYears.wrappedValue) + "  " + (LocalizedStringKey("Years").stringValue() ?? "Years")
                                 )
                                 .font(.footnote)
                                 .padding(0)
@@ -55,14 +55,14 @@ struct WarrantyItemComponenet: View {
                             }
                             if $value.durationMonths.wrappedValue > 0 {
                                 Text(
-                                    String($value.durationMonths.wrappedValue) + " Months"
+                                    String($value.durationMonths.wrappedValue) + "  " + (LocalizedStringKey("Months").stringValue() ?? "Months")
                                 )
                                 .font(.footnote)
                                 .padding(0)
                             }
                             if $value.durationDays.wrappedValue > 0 {
                                 Text(
-                                    String($value.durationDays.wrappedValue) + " Days"
+                                    String($value.durationDays.wrappedValue) + "  " + (LocalizedStringKey("Days").stringValue() ?? "Days")
                                 )
                                 .font(.footnote)
                                 .padding(0)
@@ -87,7 +87,7 @@ struct WarrantyItemComponenet: View {
                             height: 120
                         )
                     }else{
-                        Image("Spare Parts")
+                        Image("photo")
                             .resizable()
                             .scaledToFit()
                             .padding(0)
@@ -167,6 +167,9 @@ struct WarrantiesList: View {
                 Picker("", selection: $activeExpired) {
                     Text("Active").tag(0)
                     Text("Expired").tag(1)
+                }
+                .onChange(of: activeExpired) { newValue in
+                    warranties.nsPredicate = Warranty.filter(searchText, category.rawValue, newValue == 0)
                 }
                 .padding(0)
                 .listRowSeparator(.hidden)
@@ -248,14 +251,14 @@ struct WarrantiesList: View {
         }
         .onAppear{
             UISegmentedControl.appearance().selectedSegmentTintColor = .tintColor
-            warranties.nsPredicate = Warranty.filter2(category.rawValue)
+            warranties.nsPredicate = Warranty.filter("", category.rawValue, activeExpired == 0)
         }
         .searchable(text: $searchText)
         .listStyle(InsetGroupedListStyle())
         .scrollContentBackground(.hidden)
         
                     .onChange(of: searchText) { newValue in
-                        warranties.nsPredicate = Warranty.filter(newValue)
+                        warranties.nsPredicate = Warranty.filter(newValue, category.rawValue, activeExpired == 0)
                     }
 //                        .toolbar{
 //                            NavigationLink("Edit", destination: AddWarranty() )

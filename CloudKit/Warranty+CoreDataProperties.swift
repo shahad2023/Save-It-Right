@@ -2,7 +2,7 @@
 //  Warranty+CoreDataProperties.swift
 //  Save It Right
 //
-//  Created by Shouq Turki Bin Tuwaym on 12/02/2023.
+//  Created by Shouq Turki Bin Tuwaym on 19/02/2023.
 //
 //
 
@@ -27,6 +27,7 @@ extension Warranty {
     @NSManaged public var remainderBeforeDays: Int32
     @NSManaged public var shopName: String?
     @NSManaged public var startDate: Date
+    @NSManaged public var expirationDate: Date
 
 }
 

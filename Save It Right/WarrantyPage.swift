@@ -34,11 +34,11 @@ struct DynamicTextFiled: View {
     var body: some View {
         if editable {
             HStack{
-                Text(label + ": ")
+                Text((LocalizedStringKey(label).stringValue() ?? label) + ": ")
                     .padding()
                     .font(.headline)
                 Spacer()
-                TextField(label, text: $text)
+                TextField(LocalizedStringKey(label), text: $text)
                     .multilineTextAlignment(.leading)
                     .padding()
                     .background(Color("Gray1"))
@@ -47,14 +47,14 @@ struct DynamicTextFiled: View {
             .frame(width: 370, height: 80, alignment: .leading)
         } else {
             HStack{
-                Text(label + ": ")
+                Text((LocalizedStringKey(label).stringValue() ?? label) + ": ")
                     .padding()
                     .font(.headline)
                 Spacer()
                 Text(text)
                     .padding()
             }
-            .frame(width: 370, height: 50, alignment: .leading)
+            .frame(width: 370, height: 80, alignment: .leading)
         }
     }
 }
@@ -66,7 +66,7 @@ struct DynamicPicker<Selection:Hashable>: View {
     var selector: [(String?, Selection)]
  
     var body: some View {
-            Picker(label, selection: $selection) {
+            Picker(LocalizedStringKey(label), selection: $selection) {
                 Text(!editable ? "" : "Choose").foregroundColor(Color("Blue2")).tag(nil as Selection?)
                 ForEach(0..<selector.count){ i in
                     Text(selector[i].0 ?? "").tag(selector[i].1)
@@ -120,6 +120,7 @@ struct DurationComponent: View {
                     .cornerRadius(10)
                 TextField("Months", text: $months)
                     .multilineTextAlignment(.leading)
+                    .keyboardType(.numberPad)
                     .padding()
                     .onReceive(Just(months)) { newValue in
                         let filtered = newValue.filter { "0123456789".contains($0) }
@@ -132,6 +133,7 @@ struct DurationComponent: View {
                     .cornerRadius(10)
                 TextField("Days", text: $days)
                     .multilineTextAlignment(.leading)
+                    .keyboardType(.numberPad)
                     .padding()
                     .onReceive(Just(days)) { newValue in
                         let filtered = newValue.filter { "0123456789".contains($0) }
@@ -146,7 +148,7 @@ struct DurationComponent: View {
         } else {
             HStack(){
                 Text(
-                    "Years \n" +
+                    (LocalizedStringKey("Years").stringValue() ?? "Years") + " \n" +
                     (
                         ( (Int(years) ?? 0) == 0 ) ? "-" : years
                     )
@@ -157,7 +159,7 @@ struct DurationComponent: View {
                 .multilineTextAlignment(.center)
                 Spacer()
                 Text(
-                    "Months \n" +
+                    (LocalizedStringKey("Months").stringValue() ?? "Months") + " \n" +
                     (
                         ( (Int(months) ?? 0) == 0 ) ? "-" : months
                     )
@@ -168,7 +170,7 @@ struct DurationComponent: View {
                 .multilineTextAlignment(.center)
                 Spacer()
                 Text(
-                    "Days \n" +
+                    (LocalizedStringKey("Days").stringValue() ?? "Days") + " \n" +
                     (
                         ( (Int(days) ?? 0) == 0 ) ? "-" : days
                     )
@@ -238,6 +240,8 @@ enum RemindmeOption: String, Identifiable, CaseIterable{
                 return .OneDay
         }
     }
+    
+    var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
 }
 
 struct WarrantyPage: View {
@@ -271,7 +275,8 @@ struct WarrantyPage: View {
     //add photo
     @State var changeImage = false
     @State var openCamera = false
-    @State var imageSelected = UIImage()
+    
+    @State var imageSelected = UIImage(named: "photo") ?? UIImage()
     
     //Remind
     @State  var selectedRemind:RemindmeOption = .OneDay
@@ -337,8 +342,22 @@ struct WarrantyPage: View {
         warranty.durationYears = Int32(self.durationYears == "" ? "0" : self.durationYears)!
         
         warranty.startDate = self.selectedDate
+        
+        var expirationDate = warranty.startDate
+        expirationDate = Calendar.current.date(byAdding: .day, value: Int(warranty.durationDays), to: expirationDate)!
+        expirationDate = Calendar.current.date(byAdding: .month, value: Int(warranty.durationMonths), to: expirationDate)!
+        expirationDate = Calendar.current.date(byAdding: .year, value: Int(warranty.durationYears), to: expirationDate)!
+        warranty.expirationDate = expirationDate
+        
+        
         warranty.remainderBeforeDays = Int32(self.selectedRemind.numberOfDays)
         warranty.note = self.note
+        
+        NotificationManager.instance.requestAuthorization ()
+        NotificationManager.instance.scheduleNotifications(
+            Calendar.current.date(byAdding: .day, value: Int(warranty.remainderBeforeDays) * -1, to: expirationDate)!,
+            LocalizedStringKey("Your Item").stringValue()! + ": " + warranty.deviceName + " " + LocalizedStringKey("will expire soon").stringValue()!,
+            LocalizedStringKey("Expiration date is").stringValue()! + ": " + getDate(expirationDate))
 
         do {
             try self.moc.save()
@@ -369,7 +388,15 @@ struct WarrantyPage: View {
     }
     
     func validate() -> Bool{
-        if (self.deviceName == "" || self.selectedCateg == nil) {
+        if (
+            self.deviceName == "" ||
+            self.selectedCateg == nil ||
+            (
+                (durationDays == "0" || durationDays == "") &&
+                (durationMonths == "0" || durationMonths == "") &&
+                (durationYears == "0" || durationYears == "")
+            )
+        ) {
             validationError = true
             return false
         }
@@ -408,6 +435,7 @@ struct WarrantyPage: View {
                                     .frame(width: 370, height: 160)
                                 Image(uiImage: imageSelected)
                                     .resizable()
+                                    .scaledToFit()
                                     .frame(width: 360,height: 160)
                                     .padding(0)
                                 if !changeImage{
@@ -424,7 +452,7 @@ struct WarrantyPage: View {
                         }
                         if imageSelected.size.width != 0{
                             Button(action:{
-                                imageSelected = UIImage()
+                                imageSelected = UIImage(named: "photo") ?? UIImage()
                                 changeImage = false
                             }, label: {
                                 Text("Remove Photo")
@@ -444,6 +472,7 @@ struct WarrantyPage: View {
                                     .frame(width: 370, height: 160)
                                 Image(uiImage: imageSelected)
                                     .resizable()
+                                    .scaledToFit()
                                     .frame(width: 360,height: 160)
                                     .padding(0)
                             }
@@ -481,7 +510,7 @@ struct WarrantyPage: View {
                         
                         //                   Choose category
                         if self.validationError && selectedCateg == nil {
-                            Text("Please Select Category")
+                            Text(LocalizedStringKey("Please Select Category"))
                                 .fontWeight(.medium)
                                 .foregroundColor(.red)
                                 .padding(0)
@@ -502,10 +531,22 @@ struct WarrantyPage: View {
                     
 //                   Duration
                     Group{
-                        Text("Duration of Warranty:")
+                        Text("* Duration of Warranty:")
                             .padding(.leading, 13)
                             .frame(width: 370, alignment: .leading)
                             .font(.headline)
+                        
+                        if self.validationError && (
+                                (durationDays == "0" || durationDays == "") &&
+                                (durationMonths == "0" || durationMonths == "") &&
+                                (durationYears == "0" || durationYears == "")
+                            ){
+                            Text(LocalizedStringKey("Please fill duration of warrenty"))
+                                .fontWeight(.medium)
+                                .foregroundColor(.red)
+                                .padding(0)
+                                .frame(width: 340, alignment: .leading)
+                        }
                         DurationComponent(years:$durationYears, months:$durationMonths, days:$durationDays, editable:$editable)
                     }
                     
@@ -526,7 +567,7 @@ struct WarrantyPage: View {
                         label:"Remind me before:",
                         selection: $selectedRemind,
                         editable: $editable,
-                        selector: RemindmeOption.allCases.map{($0.rawValue,$0)}
+                        selector: RemindmeOption.allCases.map{($0.localizedName.stringValue(),$0)}
                     )
                     
                     
@@ -542,13 +583,13 @@ struct WarrantyPage: View {
                         
                         
                         
-                        Text("Note:")
+                        Text((LocalizedStringKey("Note").stringValue() ?? "Note") + ":")
                             .padding()
                             .frame(width: 370, alignment: .leading)
                             .font(.headline)
                         
                         if editable {
-                            TextField("Note", text: $note, axis: .vertical)
+                            TextField(LocalizedStringKey("Note").stringValue() ?? "Note", text: $note, axis: .vertical)
                                 .multilineTextAlignment(.leading)
                                 .padding()
                                 .frame(width: 370)

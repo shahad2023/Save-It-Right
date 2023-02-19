@@ -73,11 +73,18 @@ extension Warranty {
         return request
     }
     
-    static func filter(_ query: String) -> NSPredicate{
-        query.isEmpty ? NSPredicate(value: true) :  NSPredicate(format: "deviceName CONTAINS[cd] %@", query)
-    }
-    
-    static func filter2(_ query: String) -> NSPredicate{
-        query.isEmpty ? NSPredicate(value: true) :  NSPredicate(format: "category BEGINSWITH[cd] %@", query)
+    static func filter(_ query: String, _ category: String, _ isActive:Bool = true) -> NSPredicate{
+        if !query.isEmpty {
+            return NSPredicate(format: """
+                deviceName CONTAINS[cd] %@ AND
+                category BEGINSWITH[cd] %@ AND
+                expirationDate \(isActive ? ">" : "<=") now()
+            """, query,category)
+        }else{
+            return NSPredicate(format: """
+                category BEGINSWITH[cd] %@ AND
+                expirationDate \(isActive ? ">" : "<=") now()
+            """, category)
+        }
     }
 }
