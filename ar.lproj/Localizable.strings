@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  Save It Right
+
+  Created by Shouq Turki Bin Tuwaym on 19/02/2023.
+  
+*/
+"Warranty"="الضمان";
+"Search"="البحث";
+"My Warranties"="ضماناتي";
+"Jeweleries"="المجوهرات";
+"Sports Equipments"="المعدات الرياضية";
+"Electronic Devices"="الأجهزة الإلكترونية";
+"Houseware"="الأدوات المنزلية";
+"Spare Parts"="قطع غيار";
+"Others"="اخرى";
+"Save"="حفظ";
+"Add photo +"= "اضافة الصورة +";
+"* Item Name"= "* اسم العنصر";
+"Shop Name"="اسم المتجر";
+"Shop Name:"="اسم المتجر";
+"Warranty\nCompany"="شركة الضمان:";
+"* Category:"="* الفئات:";
+"Choose"="اختار";
+"Please Select Category"="من فضلك اختر الفئه";
+"Duration of Warranty:"="مدة الضمان:";
+"Years"="السنوات";
+"Months"="الأشهر";
+"Days"="الأيام";
+"Warranty Start Date:"="تاريخ بداية الضمان:";
+"Remind me before:"="ذكرني قبل:";
+"Note:"="ملاحظة:";
+"Add Warranty"="اضافة ضمان";
+"There are no items to display."="ليس هناك عناصر لعرضها.";
+"Active"="نشط";
+"Expired"="انتهى";
+"ِEdit"="تحرير";
+"Cancel"="الغاء";
+"One Day"="يوم واحد";
+"One Week"="اسبوع واحد";
+"Two Weeks"="اسبوعين";
+"One Month"="شهر واحد";
+"Two Months"="شهرين";
+"Three Months"="ثلاثة اشهر";
+"Six Months"="ستة اشهر";
+

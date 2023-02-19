@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct Save_It_RightApp: App {
+    let persistenceController = PersistenceController.shared
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainPage()
+                .preferredColorScheme(.dark)
+                .tint(.accentColor)
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         }
     }
 }
