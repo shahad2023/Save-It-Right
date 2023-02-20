@@ -181,6 +181,8 @@ struct MainPage: View {
                 )
                 .onAppear{
                     category = nil
+                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                    UIApplication.shared.applicationIconBadgeNumber = 0
                 }
         }
     }

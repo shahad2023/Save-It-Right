@@ -9,15 +9,17 @@ import SwiftUI
 
 @main
 struct Save_It_RightApp: App {
+//    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     let persistenceController = PersistenceController.shared
     
     var body: some Scene {
         WindowGroup {
-            MainPage()
+            logo()
                 .preferredColorScheme(.dark)
                 .tint(.accentColor)
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+                .environment(\.managedObjectContext, PersistenceController.managedContext)
         }
     }
 }

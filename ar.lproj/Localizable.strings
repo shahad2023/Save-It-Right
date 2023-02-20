@@ -27,8 +27,9 @@
 "Years"="السنوات";
 "Months"="الأشهر";
 "Days"="الأيام";
-"Warranty Start Date:"="تاريخ بداية الضمان:";
-"Remind me before:"="ذكرني قبل:";
+"* Warranty Start Date:"="* تاريخ بداية الضمان:";
+"End Date:"="تاريخ النهاية:";
+"* Remind me before:"="* ذكرني قبل:";
 "Note"="ملاحظة";
 "Add Warranty"="اضافة ضمان";
 "There are no items to display."="ليس هناك عناصر لعرضها.";
@@ -53,3 +54,4 @@
 "Your Item"="عنصرك";
 "will expire soon"="سوف ينتهي قريبا";
 "Expiration date is"="تاريخ الإنتهاء هو";
+"Don’t Worry and Save it Right" = "لا تشيل هم واحفظها صح";

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C15A9971299E2E8A0066A3E7 /* logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15A9970299E2E8A0066A3E7 /* logo.swift */; };
+		C1A3059329A2CA120066629E /* Model.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = C1A3059129A2C8140066629E /* Model.xcdatamodel */; };
+		C1A3059529A3C7520066629E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A3059429A3C7520066629E /* AppDelegate.swift */; };
 		C1AA87E22998C6B400747EA0 /* Save_It_RightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AA87E12998C6B400747EA0 /* Save_It_RightApp.swift */; };
 		C1AA87E42998C6B400747EA0 /* OnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AA87E32998C6B400747EA0 /* OnBoarding.swift */; };
 		C1AA87E62998C6B600747EA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1AA87E52998C6B600747EA0 /* Assets.xcassets */; };
@@ -17,10 +19,10 @@
 		C1AA87F42998C83400747EA0 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AA87F32998C83400747EA0 /* Categories.swift */; };
 		C1AA87F62998C85100747EA0 /* WarrantyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AA87F52998C85100747EA0 /* WarrantyPage.swift */; };
 		C1AA87F82998C86700747EA0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AA87F72998C86700747EA0 /* ImagePicker.swift */; };
-		C1ADC519299933B6001DB130 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1ADC517299933B6001DB130 /* Model.xcdatamodeld */; };
 		C1ADC51D299941B0001DB130 /* PersistanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ADC51C299941B0001DB130 /* PersistanceController.swift */; };
 		C1F8711229A20873006017E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1F8711429A20873006017E8 /* Localizable.strings */; };
 		C1F8712529A284C0006017E8 /* Warranty+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8712429A284C0006017E8 /* Warranty+CoreDataProperties.swift */; };
+		C1F8712929A2BF57006017E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8712829A2BF57006017E8 /* SceneDelegate.swift */; };
 		C1FB546729994677005F77D4 /* Warranty+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB546529994677005F77D4 /* Warranty+CoreDataClass.swift */; };
 		C1FB546A29994922005F77D4 /* WarrantiesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB546929994922005F77D4 /* WarrantiesList.swift */; };
 		C1FB546C29994D3D005F77D4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB546B29994D3D005F77D4 /* Helpers.swift */; };
@@ -28,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		C15A9970299E2E8A0066A3E7 /* logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logo.swift; sourceTree = "<group>"; };
+		C1A3059129A2C8140066629E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		C1A3059429A3C7520066629E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1AA87DE2998C6B400747EA0 /* Save It Right.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Save It Right.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1AA87E12998C6B400747EA0 /* Save_It_RightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save_It_RightApp.swift; sourceTree = "<group>"; };
 		C1AA87E32998C6B400747EA0 /* OnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoarding.swift; sourceTree = "<group>"; };
@@ -38,13 +42,13 @@
 		C1AA87F32998C83400747EA0 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		C1AA87F52998C85100747EA0 /* WarrantyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarrantyPage.swift; sourceTree = "<group>"; };
 		C1AA87F72998C86700747EA0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		C1ADC518299933B6001DB130 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		C1ADC51C299941B0001DB130 /* PersistanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceController.swift; sourceTree = "<group>"; };
 		C1F8711329A20873006017E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C1F8711C29A215F0006017E8 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C1F8712429A284C0006017E8 /* Warranty+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Warranty+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C1F8712629A2B60C006017E8 /* Save-It-Right-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Save-It-Right-Info.plist"; sourceTree = SOURCE_ROOT; };
 		C1F8712729A2B631006017E8 /* Save It Right.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Save It Right.entitlements"; sourceTree = "<group>"; };
+		C1F8712829A2BF57006017E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C1FB546529994677005F77D4 /* Warranty+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Warranty+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		C1FB546929994922005F77D4 /* WarrantiesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarrantiesList.swift; sourceTree = "<group>"; };
 		C1FB546B29994D3D005F77D4 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -64,6 +68,7 @@
 		C1AA87D52998C6B400747EA0 = {
 			isa = PBXGroup;
 			children = (
+				C1A3059429A3C7520066629E /* AppDelegate.swift */,
 				C1F8711429A20873006017E8 /* Localizable.strings */,
 				C1ADC51E299941F0001DB130 /* CloudKit */,
 				C1AA87E02998C6B400747EA0 /* Save It Right */,
@@ -113,8 +118,9 @@
 			children = (
 				C1FB546529994677005F77D4 /* Warranty+CoreDataClass.swift */,
 				C1F8712429A284C0006017E8 /* Warranty+CoreDataProperties.swift */,
-				C1ADC517299933B6001DB130 /* Model.xcdatamodeld */,
+				C1A3059129A2C8140066629E /* Model.xcdatamodel */,
 				C1ADC51C299941B0001DB130 /* PersistanceController.swift */,
+				C1F8712829A2BF57006017E8 /* SceneDelegate.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -196,8 +202,10 @@
 				C1AA87F62998C85100747EA0 /* WarrantyPage.swift in Sources */,
 				C1AA87F22998C80E00747EA0 /* UISafeArea.swift in Sources */,
 				C15A9971299E2E8A0066A3E7 /* logo.swift in Sources */,
-				C1ADC519299933B6001DB130 /* Model.xcdatamodeld in Sources */,
+				C1F8712929A2BF57006017E8 /* SceneDelegate.swift in Sources */,
+				C1A3059329A2CA120066629E /* Model.xcdatamodel in Sources */,
 				C1AA87F82998C86700747EA0 /* ImagePicker.swift in Sources */,
+				C1A3059529A3C7520066629E /* AppDelegate.swift in Sources */,
 				C1ADC51D299941B0001DB130 /* PersistanceController.swift in Sources */,
 				C1AA87F42998C83400747EA0 /* Categories.swift in Sources */,
 				C1F8712529A284C0006017E8 /* Warranty+CoreDataProperties.swift in Sources */,
@@ -367,9 +375,12 @@
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = Shoug.SaveItRight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -398,9 +409,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Shoug.SaveItRight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -426,19 +440,6 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		C1ADC517299933B6001DB130 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				C1ADC518299933B6001DB130 /* Model.xcdatamodel */,
-			);
-			currentVersion = C1ADC518299933B6001DB130 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = C1AA87D62998C6B400747EA0 /* Project object */;
 }

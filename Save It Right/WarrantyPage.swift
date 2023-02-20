@@ -37,6 +37,7 @@ struct DynamicTextFiled: View {
                 Text((LocalizedStringKey(label).stringValue() ?? label) + ": ")
                     .padding()
                     .font(.headline)
+                    .frame(width: 140)
                 Spacer()
                 TextField(LocalizedStringKey(label), text: $text)
                     .multilineTextAlignment(.leading)
@@ -361,7 +362,11 @@ struct WarrantyPage: View {
 
         do {
             try self.moc.save()
-            self.presentationMode.wrappedValue.dismiss()
+            if self.addMode {
+                self.presentationMode.wrappedValue.dismiss()
+            } else {
+                self.editable = false
+            }
         } catch {
             print("whoops \(error.localizedDescription)")
         }
@@ -499,13 +504,46 @@ struct WarrantyPage: View {
                     Group{
                         DynamicTextFiled(label: "* Item Name", text: $deviceName, editable: $editable)
                         
+    //                   Warranty Start Date
+                        DatePicker("* Warranty Start Date:", selection: $selectedDate, displayedComponents: .date)
+                            .multilineTextAlignment(.leading)
+                            .padding()
+                            .frame(width: 370, height: 50)
+                            .background(!editable ? Color(.clear) : Color("Gray1"))
+                            .cornerRadius(10)
+                            .disabled(!editable)
+                            .font(.headline)
                         
-                        //                   Shop Name
-                        DynamicTextFiled(label: "Shop Name", text: $shopName, editable: $editable)
+                        
+    //                   Duration
+                        Group{
+                            Text("* Duration of Warranty:")
+                                .padding(.leading, 13)
+                                .frame(width: 370, alignment: .leading)
+                                .font(.headline)
+                            
+                            if self.validationError && (
+                                    (durationDays == "0" || durationDays == "") &&
+                                    (durationMonths == "0" || durationMonths == "") &&
+                                    (durationYears == "0" || durationYears == "")
+                                ){
+                                Text(LocalizedStringKey("Please fill duration of warrenty"))
+                                    .fontWeight(.medium)
+                                    .foregroundColor(.red)
+                                    .padding(0)
+                                    .frame(width: 340, alignment: .leading)
+                            }
+                            DurationComponent(years:$durationYears, months:$durationMonths, days:$durationDays, editable:$editable)
+                        }
                         
                         
-                        //                   Warranty Company Name
-                        DynamicTextFiled(label:"Warranty\nCompany", text: $companyName, editable: $editable)
+    //                     Remind me
+                        DynamicPicker(
+                            label:"* Remind me before:",
+                            selection: $selectedRemind,
+                            editable: $editable,
+                            selector: RemindmeOption.allCases.map{($0.localizedName.stringValue(),$0)}
+                        )
                         
                         
                         //                   Choose category
@@ -529,46 +567,14 @@ struct WarrantyPage: View {
                         )
                     }
                     
-//                   Duration
-                    Group{
-                        Text("* Duration of Warranty:")
-                            .padding(.leading, 13)
-                            .frame(width: 370, alignment: .leading)
-                            .font(.headline)
-                        
-                        if self.validationError && (
-                                (durationDays == "0" || durationDays == "") &&
-                                (durationMonths == "0" || durationMonths == "") &&
-                                (durationYears == "0" || durationYears == "")
-                            ){
-                            Text(LocalizedStringKey("Please fill duration of warrenty"))
-                                .fontWeight(.medium)
-                                .foregroundColor(.red)
-                                .padding(0)
-                                .frame(width: 340, alignment: .leading)
-                        }
-                        DurationComponent(years:$durationYears, months:$durationMonths, days:$durationDays, editable:$editable)
-                    }
-                    
-//                   Warranty Start Date
-                    DatePicker("Warranty Start Date:", selection: $selectedDate, displayedComponents: .date)
-                        .multilineTextAlignment(.leading)
-                        .padding()
-                        .frame(width: 370, height: 50)
-                        .background(!editable ? Color(.clear) : Color("Gray1"))
-                        .cornerRadius(10)
-                        .disabled(!editable)
-                        .font(.headline)
                     
                     
+                    //                   Shop Name
+                    DynamicTextFiled(label: "Shop Name", text: $shopName, editable: $editable)
                     
-//                     Remind me
-                    DynamicPicker(
-                        label:"Remind me before:",
-                        selection: $selectedRemind,
-                        editable: $editable,
-                        selector: RemindmeOption.allCases.map{($0.localizedName.stringValue(),$0)}
-                    )
+                    
+                    //                   Warranty Company Name
+                    DynamicTextFiled(label:"Warranty\nCompany", text: $companyName, editable: $editable)
                     
                     
                     Group{

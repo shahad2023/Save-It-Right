@@ -14,18 +14,21 @@ struct logo: View {
     var body: some View {
 
         if  isActive {
-           OnBoarding()
+            MainPage()
+                .preferredColorScheme(.dark)
+                .tint(.accentColor)
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, PersistenceController.managedContext)
+//            OnBoarding()
         } else{
             ZStack {
 
                 Color.black
                         .ignoresSafeArea()
                 VStack{
-                    Image("logo")
-
-                Text("Don’t Worry and Save it Right")
+                    Image("logo_en")
+                    Text(LocalizedStringKey("Don’t Worry and Save it Right"))
                 .font(.title2)
-                .padding(.top, 26.0)
                 .foregroundColor(Color(red: 0.022, green: 0.689, blue: 0.998))
                 }
                 .scaleEffect(size)

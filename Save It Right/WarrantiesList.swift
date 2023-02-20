@@ -26,9 +26,10 @@ struct WarrantyItemComponenet: View {
     
     var body: some View{
         Button(action:{self.isLinkActive = true}, label:{
-            VStack(spacing: 0){
+            VStack(alignment: .leading, spacing: 0){
                 Text($value.deviceName.wrappedValue)
                     .font(.title2)
+                    .fontWeight(.bold)
                     .padding(.bottom, 10)
                 HStack(spacing: 0) {
                     VStack(alignment: .leading, spacing: 0){
@@ -38,6 +39,12 @@ struct WarrantyItemComponenet: View {
                             .fontWeight(.medium)
                             .padding(0)
                         Text(getDate($value.startDate.wrappedValue))
+                            .padding(.bottom, 10)
+                        
+                        Text("End Date:")
+                            .fontWeight(.medium)
+                            .padding(0)
+                        Text(getDate($value.expirationDate.wrappedValue))
                             .padding(.bottom, 10)
                         
                         
@@ -156,7 +163,7 @@ struct WarrantiesList: View {
     @State var searchText = ""
     
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(entity: Warranty.entity(), sortDescriptors: [])
+    @FetchRequest(entity: Warranty.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Warranty.expirationDate, ascending: true)])
     var warranties: FetchedResults<Warranty>
 //        @State var searchText : SearchText = .init()
     
@@ -249,6 +256,9 @@ struct WarrantiesList: View {
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             )
         }
+        .refreshable(action: {
+            try? moc.setQueryGenerationFrom(.current)
+        })
         .onAppear{
             UISegmentedControl.appearance().selectedSegmentTintColor = .tintColor
             warranties.nsPredicate = Warranty.filter("", category.rawValue, activeExpired == 0)
@@ -308,7 +318,7 @@ struct Category_Previews: PreviewProvider {
     static var previews: some View {
         
         NavigationView{
-            WarrantiesList(category: .Others)
+            WarrantiesList(category: .Jeweleries)
                 .preferredColorScheme(.dark)
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
