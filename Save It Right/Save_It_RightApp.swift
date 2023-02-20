@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct Save_It_RightApp: App {
-//    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     let persistenceController = PersistenceController.shared
     

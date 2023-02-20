@@ -16,8 +16,24 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        print("\n-------> applicationDidFinishLaunching")
-        return true
+        
+            // Override point for customization after application launch.
+            
+//            let launchedBefore = UserDefaults.standard.bool(forKey: "completeOnBoarding")
+//            
+//    //        UserDefaults.standard.set(true, forKey: "launchedBefore")
+//            
+//            if launchedBefore  {
+//                print("Not first launch.")
+//            }
+//                
+//            else {
+//                print("First launch, setting UserDefault.")
+//                
+//                UserDefaults.standard.set(true, forKey: "launchedBefore")
+//            }
+            
+            return true
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -37,25 +53,5 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // Call the completion handler when you have finished processing the download task
         completionHandler(.newData) // or .noData or .failed
-    }
-    
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        
-//        UserDefaults.standard.set(true, forKey: "launchedBefore")
-        
-        if launchedBefore  {
-            print("Not first launch.")
-        }
-            
-        else {
-            print("First launch, setting UserDefault.")
-            
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
-        }
-        
-        return true
     }
 }

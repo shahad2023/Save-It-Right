@@ -14,12 +14,17 @@ struct logo: View {
     var body: some View {
 
         if  isActive {
-            MainPage()
+//            let launchedBefore = UserDefaults.standard.bool(forKey: "completeOnBoarding")
+//            if launchedBefore{
+//                MainPage()
+//                    .preferredColorScheme(.dark)
+//                    .tint(.accentColor)
+//                //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//                    .environment(\.managedObjectContext, PersistenceController.managedContext)
+//            }else{
+            OnBoarding()
                 .preferredColorScheme(.dark)
-                .tint(.accentColor)
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environment(\.managedObjectContext, PersistenceController.managedContext)
-//            OnBoarding()
+//            }
         } else{
             ZStack {
 

@@ -1,110 +1,111 @@
-///
-//  OnBoarding.swift
-//  SaveItRight
-//
-//  Created by Lamia AlSiddiqi on 14/07/1444 AH.
-//
-
 import SwiftUI
 
-struct OnBoardingSteps {
-    let image: String
-    let description: String
-}
-
-private let onBoardingSteps = [
-    OnBoardingSteps(image: "OnBoarding1", description: "Save your Warranties in One Place"),
-    OnBoardingSteps(image: "OnBoarding2", description: "Categorize your Warranties"),
-    OnBoardingSteps(image: "OnBoarding3", description: "Take the Advantage of the Warranty Before it Ends")
-]
 struct OnBoarding: View {
-    @State private var currentStep = 0
-    
-    init() {
-        UIScrollView.appearance().bounces = false
-    }
+    @AppStorage("_shouldShowOnBoarding") var shouldShowOnBoarding: Bool = true
     
     var body: some View {
-        
-       
-        ZStack {
-//            Color.black
-//                .ignoresSafeArea()
-            VStack{
+        MainPage()
+        .fullScreenCover(isPresented: $shouldShowOnBoarding, content: {
+            OnBoardingView(shouldShowOnBoarding: $shouldShowOnBoarding)
+                .preferredColorScheme(.dark)
+            
+        })
+    }
+}
+
+//OnBoarding
+
+struct OnBoardingView: View {
+    @Binding var shouldShowOnBoarding: Bool
+    
+    var body: some View {
+        TabView {
+            PageView(
+                title: "Save your Warranties in One Place",
+                image: "OnBoarding1",
+                showsDismissButton: false,
+                shouldShowOnBoarding: $shouldShowOnBoarding
+            )
+            
+            PageView(
+                title: "Categorize your Warranties",
+                image: "OnBoarding2", showsDismissButton: false,
+                shouldShowOnBoarding: $shouldShowOnBoarding
+                
+            )
+            
+            PageView(
+                title: "Take the Advantage of the Warrantiy Before it Ends",
+                image: "OnBoarding3",
+                showsDismissButton: true,
+                shouldShowOnBoarding: $shouldShowOnBoarding
+                
+            )
+            
+        }
+        .tabViewStyle(PageTabViewStyle())
+    }
+}
+
+struct PageView: View {
+    let title: String
+    let image: String
+    let showsDismissButton: Bool
+    @Binding var shouldShowOnBoarding: Bool
+    
+    var body: some View {
+        VStack {
+            if !showsDismissButton {
                 HStack{
                     Spacer()
                     Button(action: {
-                        self.currentStep = onBoardingSteps.count - 1
-                    }){
+                        shouldShowOnBoarding.toggle()
+                        
+                        
+                    }, label: {
                         Text("Skip")
-                            .padding(16)
-                            .foregroundColor(Color(red: 0.022, green: 0.689, blue: 0.998))
-                    }
+                            .bold()
+                            .foregroundColor(Color("Blue2"))
+                            .cornerRadius(6)
+                    })
                 }
-                TabView(selection: $currentStep){
-                    ForEach(0..<onBoardingSteps.count) { it in
-                        VStack{
-                            Image(onBoardingSteps[it].image)
-                                .resizable()
-                                .frame(width: 350, height:350)
-                            
-                            Text(onBoardingSteps[it].description)
-                                .font(.title)
-                                .bold()
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.white)
-                                .padding(.horizontal,32)
-                                .padding(.top,16)
-                        }
-                        .tag(it)
-                    }
-                }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                
-                HStack{
-                    ForEach(0..<onBoardingSteps.count) { it in
-                        if it == currentStep {
-                            Rectangle()
-                                .frame(width: 20, height: 10)
-                                .cornerRadius(10)
-                                .foregroundColor(Color(red: 0.022, green: 0.689, blue: 0.998))
-                        } else {
-                            Circle()
-                                .frame(width: 10, height: 10)
-                                .foregroundColor(.white)
-                            
-                        }
-                    }
-                }
-                .padding(.bottom, 24)
-                
-                Button(action:{
-                    if self.currentStep < onBoardingSteps.count - 1 {
-                        self.currentStep += 1
-                    }else {
-                        // Get Started Logic
-                    }
-                }) {
-                    Text(currentStep < onBoardingSteps.count - 1 ? "Next" : "Get started")
-                        .padding(16)
-                        .frame(maxWidth: .infinity)
-                        .background(Color(red: 0.022, green: 0.689, blue: 0.998))
-                        .cornerRadius(16)
-                        .padding(.horizontal, 16)
-                        .foregroundColor(.white)
-                }
-                .buttonStyle(PlainButtonStyle())
-                    
+//                .padding(.top , -200)
+//                .padding(.trailing , 40.0)
             }
-        }
+            Spacer()
+            Image(image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 250, height: 250)
+                .padding()
+            
+            Text(title)
+                .font(.system(size: 32))
+                .multilineTextAlignment(.center)
+                .padding()
+            
+            
+            if showsDismissButton {
+                Button(action: {
+                    shouldShowOnBoarding.toggle()
+                    
+                    
+                }, label: {
+                    Text("Get Started")
+                        .bold()
+                        .foregroundColor(.white)
+                        .frame(width: 200, height: 50)
+                        .background(Color("Blue2"))
+                        .cornerRadius(6)
+                })
+            }
+            Spacer()
         }
     }
-
-
+}
 struct OnBoarding_Previews: PreviewProvider {
     static var previews: some View {
         OnBoarding()
             .preferredColorScheme(.dark)
-
     }
 }
